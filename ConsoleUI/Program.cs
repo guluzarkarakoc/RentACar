@@ -35,7 +35,7 @@ using DataAccess.Concrete.InMemory;
 
 //static ICarManager CarManagerTest()
 {
-    ICarManager carManager = new ICarManager(new EfCarDal());
+    CarManager carManager = new CarManager(new EfCarDal());
     var result = carManager.GetAll();
     if (result.Success == true)
     {

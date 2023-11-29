@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public Users GetById(int UserId)
         {
-            return _IUserDal.Get(u=>u.UserId == UserId);
+            return _IUserDal.Get(u=>u.Id == UserId);
         }
     }
 }

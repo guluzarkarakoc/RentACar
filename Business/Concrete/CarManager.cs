@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class ICarManager : ICarService
+    public class CarManager : ICarService
     {
         ICarDal _CarDal;
 
-        public ICarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal)
         {
             _CarDal = carDal;
         }
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==00)
+            if (DateTime.Now.Hour == 00)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -51,6 +51,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>> (_CarDal.GetCarDetails());
         }
+
 
         IResult ICarService.Add(Car car)
         {
