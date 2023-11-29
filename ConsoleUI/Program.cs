@@ -20,12 +20,7 @@ foreach (var car in carManager2.GetAllByBrandId(2))
     Console.WriteLine(car.Description);
 }
 
-ICarManager carManager = new ICarManager(new EfCarDal());
-foreach (var car in carManager.GetAll())
-{
-    Console.WriteLine(car.ModelYear);
-}
-
+ICarManager carManager = CarManagerTest();
 
 CarTest(carManager);
 
@@ -36,4 +31,15 @@ static void CarTest(ICarManager carManager)
     {
         Console.WriteLine(car.Description);
     }
+}
+
+static ICarManager CarManagerTest()
+{
+    ICarManager carManager = new ICarManager(new EfCarDal());
+    foreach (var car in carManager.GetCarDetails())
+    {
+        Console.WriteLine(car.CarName + "/"+ car.BrandName);
+    }
+
+    return carManager;
 }
