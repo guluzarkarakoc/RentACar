@@ -8,38 +8,45 @@ using DataAccess.Concrete.InMemory;
 //    Console.WriteLine(car.Description);
 //}
 
-ICarManager carManager1 = new ICarManager(new EfCarDal());
-foreach (var car in carManager1.GetAll())
-{
-    Console.WriteLine(car.Description);
-}
+//ICarManager carManager1 = new ICarManager(new EfCarDal());
+//foreach (var car in carManager1.GetAll())
+//{
+//    Console.WriteLine(car.Description);
+//}
 
-ICarManager carManager2 = new ICarManager(new EfCarDal());
-foreach (var car in carManager2.GetAllByBrandId(2))
-{
-    Console.WriteLine(car.Description);
-}
+//ICarManager carManager2 = new ICarManager(new EfCarDal());
+//foreach (var car in carManager2.GetAllByBrandId(2))
+//{
+//    Console.WriteLine(car.Description);
+//}
 
-ICarManager carManager = CarManagerTest();
+//ICarManager carManager = CarManagerTest();
 
-CarTest(carManager);
+//CarTest(carManager);
 
-static void CarTest(ICarManager carManager)
-{
-    ICarManager carManager3 = new ICarManager(new EfCarDal());
-    foreach (var car in carManager.GetAllByDailyPrice(500, 900))
-    {
-        Console.WriteLine(car.Description);
-    }
-}
+//static void CarTest(ICarManager carManager)
+//{
+//    ICarManager carManager3 = new ICarManager(new EfCarDal());
+//    foreach (var car in carManager.GetAllByDailyPrice(500, 900))
+//    {
+//        Console.WriteLine(car.Description);
+//    }
+//}
 
-static ICarManager CarManagerTest()
+//static ICarManager CarManagerTest()
 {
     ICarManager carManager = new ICarManager(new EfCarDal());
-    foreach (var car in carManager.GetCarDetails())
+    var result = carManager.GetAll();
+    if (result.Success == true)
     {
-        Console.WriteLine(car.CarName + "/"+ car.BrandName);
+        foreach (var car in result.Data)
+        {
+            Console.WriteLine(car.CarName + "/" + car.BrandId);
+        }
+    }
+    else
+    {
+        Console.WriteLine(result.Message);
     }
 
-    return carManager;
 }

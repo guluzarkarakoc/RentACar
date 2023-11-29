@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Contants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
@@ -21,29 +22,34 @@ namespace Business.Concrete
             _CarDal = carDal;
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _CarDal.GetAll();
+            if (DateTime.Now.Hour==00)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+
+            return new SuccessDataResult<List<Car>>( _CarDal.GetAll(),Messages.CarsListed);
         }
 
-        public List<Car> GetAllByBrandId(int id)
+        public IDataResult<List<Car>> GetAllByBrandId(int id)
         {
-            return _CarDal.GetAll(t=>t.BrandId == id);
+            return new SuccessDataResult<List< Car >> (_CarDal.GetAll(t=>t.BrandId == id));
         }
 
-        public List<Car> GetAllByDailyPrice(decimal min, decimal max)
+        public IDataResult<List<Car>> GetAllByDailyPrice(decimal min, decimal max)
         {
-            return _CarDal.GetAll(t => t.DailyPrice >= min && t.DailyPrice <= max);
+            return new SuccessDataResult<List<Car>>(_CarDal.GetAll(t => t.DailyPrice >= min && t.DailyPrice <= max));
         }
 
-        public Car GetById(int CarId)
+        public IDataResult<Car> GetById(int CarId)
         {
-            return _CarDal.Get(t=>t.CarId==CarId);
+            return new SuccessDataResult<Car>(_CarDal.Get(t=>t.CarId==CarId));
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _CarDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>> (_CarDal.GetCarDetails());
         }
 
         IResult ICarService.Add(Car car)
@@ -51,10 +57,10 @@ namespace Business.Concrete
 
             if (car.CarName.Length<2)
             {
-                return new ErrorResult("Araç ismi en az iki karakter olmalıdır.");
+                return new ErrorResult(Messages.CarNameInvalid);
             }
             _CarDal.Add(car);
-            return new Result( true, "Araç eklendi.");
+            return new Result( true, Messages.CarAdded);
         }
     }
 }
