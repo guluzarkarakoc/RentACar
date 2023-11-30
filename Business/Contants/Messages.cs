@@ -13,5 +13,6 @@ namespace Business.Contants
         public static string CarNameInvalid = "Araç ismi geçersiz.";
         internal static string MaintenanceTime="Sistem bakımda.";
         internal static string CarsListed="Araçlar Listelendi.";
+        internal static string DailyPriceInvalid="Ücret geçersiz";
     }
 }
