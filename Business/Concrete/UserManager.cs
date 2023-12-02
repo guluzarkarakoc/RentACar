@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -17,14 +19,16 @@ namespace Business.Concrete
             _IUserDal = userDal;
         }
 
-        public List<Users> GetALl()
+        
+
+        IDataResult<List<Users>> IUserService.GetALl()
         {
-        return _IUserDal.GetAll();
+            return new SuccessDataResult<List<Users>>( _IUserDal.GetAll());
         }
 
-        public Users GetById(int UserId)
+        IDataResult<Users> IUserService.GetById(int UserId)
         {
-            return _IUserDal.Get(u=>u.Id == UserId);
+            return new SuccessDataResult<Users>(_IUserDal.Get(u => u.Id == UserId));
         }
     }
 }

@@ -11,8 +11,12 @@ namespace Business.Contants
     {
         public static string CarAdded = "Araç eklendi.";
         public static string CarNameInvalid = "Araç ismi geçersiz.";
-        internal static string MaintenanceTime="Sistem bakımda.";
-        internal static string CarsListed="Araçlar Listelendi.";
-        internal static string DailyPriceInvalid="Ücret geçersiz";
+        public static string MaintenanceTime="Sistem bakımda.";
+        public static string CarsListed="Araçlar Listelendi.";
+        public static string DailyPriceInvalid="Ücret geçersiz";
+        public static string CarCountError ="Bir markadan en fazla 10 araç eklenebilir.";
+        public static string CarNameAlreadyExists="Bu isimde bir araç mevcut.";
+        internal static string RentalNotAdded="Araç Kiralanamadı.";
+        internal static string RentalAdded="Araç Kiralandı";
     }
 }
